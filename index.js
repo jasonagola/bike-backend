@@ -15,8 +15,8 @@ app.use(cors({
     // origin: 'http://localhost:5173'
 }))
 
-app.use('backend/square', squareRoute)
-app.use('backend/db', databaseRoute)
+app.use('/backend/square', squareRoute)
+app.use('/backend/db', databaseRoute)
 
 
 

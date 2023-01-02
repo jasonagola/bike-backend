@@ -1,5 +1,6 @@
 const router = require("express").Router()
 const JSONBig = require('json-bigint')
+require('dotenv').config()
 
 const {Client, Environment} = require('square')
 
@@ -10,6 +11,10 @@ const client = new Client({
 })
 
 //Customer search in square customer by fuzzy phone number
+router.get('/test', (req, res) => {
+  res.send('You are at the square route!')
+})
+
 router.get('/searchCustomer', async (req, res) => {
     const searchTerm = req.query.searchTerm
     console.log(searchTerm)
