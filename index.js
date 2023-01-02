@@ -3,6 +3,9 @@ const app = express()
 const cors = require('cors')
 const squareRoute = require("./routes/square")
 const databaseRoute = require("./routes/database")
+const https = require('https')
+const fs = require('fs')
+
 
 
 require('dotenv').config()
@@ -18,7 +21,10 @@ app.use(cors({
 app.use('/backend/square', squareRoute)
 app.use('/backend/db', databaseRoute)
 
-
+const httpsServer = https.createServer({
+    key: fs.readFileSync('/etc/letsencrypt/live/bike.jasonagola.dev/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/bike.jasonagola.dev/fullchain.pem'),
+  }, app);
 
 
 app.get('/backend', (req, res) => {
