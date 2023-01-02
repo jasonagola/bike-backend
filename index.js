@@ -14,9 +14,7 @@ PORT = 8800
 
 app.listen(PORT, () => console.log(`Customer Loyalty Backend now running on port: ${PORT}`))
 
-app.use(cors({
-    // origin: 'http://localhost:5173'
-}))
+app.use(cors())
 
 app.use('/backend/square', squareRoute)
 app.use('/backend/db', databaseRoute)
@@ -26,6 +24,13 @@ const httpsServer = https.createServer({
     cert: fs.readFileSync('/etc/letsencrypt/live/bike.jasonagola.dev/fullchain.pem'),
   }, app);
 
+httpServer.listen(80, () => {
+    console.log('HTTP Server running on port 80');
+});
+
+httpsServer.listen(443, () => {
+    console.log('HTTPS Server running on port 443');
+});
 
 app.get('/backend', (req, res) => {
     res.send('Hello you have reached the backend.  Leave a message at the beep...')
