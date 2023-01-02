@@ -21,3 +21,6 @@ app.use('backend/db', databaseRoute)
 
 
 
+app.get('/backend', (req, res) => {
+    res.send('Hello you have reached the backend.  Leave a message at the beep...')
+})
