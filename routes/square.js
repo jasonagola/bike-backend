@@ -45,8 +45,8 @@ router.put('/createCustomer', async (req, res) => {
     const email = req.query.email
     try {
         const response = await client.customersApi.createCustomer({
-          givenName: last_name,
-          familyName: first_name,
+          givenName: first_name,
+          familyName: last_name,
           emailAddress: email,
           phoneNumber: phone_number
         });
