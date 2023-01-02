@@ -1,7 +1,7 @@
 const router = require("express").Router()
 const db = require('../databaseConfig')
 
-router.get('/db/customer/customerExists', async (req, res) => {
+router.get('/customer/customerExists', async (req, res) => {
     const customer_id = req.query.customer_id
     db.query(`SELECT EXISTS(SELECT 1 FROM Customers WHERE customer_id = '${customer_id}')`, (err, result) => {
         if (err) {
@@ -14,7 +14,7 @@ router.get('/db/customer/customerExists', async (req, res) => {
     })
 })
 
-router.put('/db/customer/add', async (req, res) => {
+router.put('/customer/add', async (req, res) => {
     console.log('Hitting backend customer add')
     const customer_id = req.query.customer_id
     const first_name = req.query.first_name
@@ -33,7 +33,7 @@ router.put('/db/customer/add', async (req, res) => {
     )
 })
 
-router.put('/db/loyalty/checkIn', (req, res) => {
+router.put('/loyalty/checkIn', (req, res) => {
     const customer_id = req.query.customer_id
     const checkInDate = req.query.checkInDate
     db.query(`INSERT INTO CheckIn (customer_id, checkIn) VALUES ('${customer_id}',${checkInDate})`, (err, result) => {
@@ -58,7 +58,7 @@ router.put('/db/loyalty/checkIn', (req, res) => {
 //     const email = req.query.email
 // })
 
-router.get('/db/loyalty/checkInStatus', (req, res) => {
+router.get('/loyalty/checkInStatus', (req, res) => {
     const customer_id = req.query.customer_id
     db.query(`SELECT EXISTS(SELECT 1 FROM CheckIn WHERE customer_id = '${customer_id}')`, (err, result) => {
         if (err) {
