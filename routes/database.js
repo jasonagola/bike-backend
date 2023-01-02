@@ -1,5 +1,5 @@
 const router = require("express").Router()
-const db = require('..databaseConfig')
+const db = require('../databaseConfig')
 
 router.get('/db/customer/customerExists', async (req, res) => {
     const customer_id = req.query.customer_id
@@ -73,4 +73,4 @@ router.get('/db/loyalty/checkInStatus', (req, res) => {
 })
 
 
-module.exports(router)
+module.exports = router
