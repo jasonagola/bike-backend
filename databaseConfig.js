@@ -1,11 +1,12 @@
 const mysql = require('mysql')
+require('dotenv').config()
 
 const db = mysql.createPool({
     connectionLimit: 10,
-    host:'191.101.79.52',
-    user: 'u844101523_localbikeshop',
-    password: 'PizzaParty69!',
-    database: 'u844101523_bikeShopdb'
+    host: process.env.db_host,
+    user: process.env.db_user,
+    password: process.env.db_password,
+    database: process.env.db_database
 });
 
 db.on('error', function (err) {
