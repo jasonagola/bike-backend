@@ -41,22 +41,10 @@ router.put('/loyalty/checkIn', (req, res) => {
             console.log(err)
             res.send(err)
         } else {
-            console.log(result)
             res.send(result)
         }
     })
 })
-
-// })
-
-
-// app.put('/db/loyalty/join', async (req, res) => {
-//     const customer_id = req.query.customer_id;
-//     const first_name = req.query.first_name
-//     const last_name = req.query.last_name
-//     const phone_number = req.query.phone_number
-//     const email = req.query.email
-// })
 
 router.get('/loyalty/checkInStatus', (req, res) => {
     const customer_id = req.query.customer_id
@@ -65,7 +53,6 @@ router.get('/loyalty/checkInStatus', (req, res) => {
             console.log(err)
             return res.send(err)
         } else {
-            console.log(result)
             res.send(result)
         }
     })
@@ -75,17 +62,11 @@ router.get('/loyalty/checkInStatus', (req, res) => {
 
 router.put('/rides/addRide', (req, res) => {
     const {date, start, end, value, processed} = req.query.rideInfo
-    console.log(date)
-    // const date = req.query.date
-    // const start = req.query.start
-    // const end = req.query.end
-    // const processed = req.query.processed
     db.query(`INSERT INTO Rides (ride_date, start_time, end_time, ride_value, processed) VALUES ('${date}', '${start}', '${end}', ${value}, 0)`, (err, result) => {
         if (err) {
             console.log(err)
             return res.send(err)
         } else {
-            console.log(result)
             res.send(result)
         }
     })
@@ -98,19 +79,32 @@ router.get('/rides/ridesThisMonth', (req, res) => {
             console.log(err)
             return res.send(err)
         } else {
+            res.send(result)
+        }
+    })
+})
+
+router.get('/rides/getRide', (req, res) => {
+    console.log(req.query.date)
+    console.log("Hello ffrom thhe BA")
+    db.query(`SELECT * FROM Rides WHERE ride_date = '${req.query.date}'`, (err, result) => {
+        if (err) {
+            console.log(err)
+            return res.send(err)
+        } else {
             console.log(result)
             res.send(result)
         }
     })
 })
 
-router.get('/rides/rideToday', (req, res) => {
-    db.query('SELECT * FROM Rides WHERE ride_date = CURRENT_DATE()', (err, res) => {
+router.get('/rides/updateRide', (req, res) => {
+    const {id, date, start, end, value} = req.query.rideInfo
+    db.query(`UPDATE Rides SET ride_date='${date}', start_time='${start}', end_time='${end}', ride_value=${value} WHERE ride_id=${id}`, (err, result) => {
         if (err) {
             console.log(err)
             return res.send(err)
         } else {
-            console.log(result)
             res.send(result)
         }
     })
