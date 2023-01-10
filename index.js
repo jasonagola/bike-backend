@@ -16,6 +16,7 @@ PORT = 8800
 app.listen(PORT, () => console.log(`Customer Loyalty Backend now running on port: ${PORT}`))
 
 app.use(cors())
+app.use(express.json())
 
 app.use('/backend/square', squareRoute)
 app.use('/backend/db', databaseRoute)
