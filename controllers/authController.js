@@ -7,7 +7,8 @@ const hangleLogin = async (req, res) => {
     if (!username || !password) {
         return res.status(400).json({'message': 'Username and Password are required'});
     }
-    const user = db.query(`SELECT 1 FROM Users WHERE username = ${username}`, err => {
+    try {
+        const user = db.query(`SELECT 1 FROM Users WHERE username = ${username}`, err => {
         if (err) {
             console.log(err)
         }
