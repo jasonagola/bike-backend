@@ -3,6 +3,8 @@ const app = express()
 const cors = require('cors')
 const squareRoute = require("./routes/square")
 const databaseRoute = require("./routes/database")
+const registerRoute = require("./routes/register")
+const authRoute = require('./routes/auth')
 const cron = require('node-cron')
 const https = require('https')
 const fs = require('fs')
@@ -20,6 +22,10 @@ app.use(express.json())
 
 app.use('/backend/square', squareRoute)
 app.use('/backend/db', databaseRoute)
+app.use('/register', registerRoute)
+app.use('/auth', authRoute)
+
+////For use in deployed VPS for https creation
 
 // const httpsServer = https.createServer({
 //     key: fs.readFileSync('/etc/letsencrypt/live/bike.jasonagola.dev/privkey.pem'),
