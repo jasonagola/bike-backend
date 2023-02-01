@@ -51,34 +51,4 @@ const handleLogin = async (req, res) => {
     
     }
     
-    // if (passwordMatch) {
-    //     res.json({'message': `User ${username} is logged in!`})
-    //     ///create JWT
-    //     // const accessToken = jwt.sign(
-    //     //     process.env.ACCESS_TOKEN_SECRET
-    //     // )
-    // } else {
-    //     res.sendStatus(401)
-    // }
-    
-
-
-
-//     const passwordMatch = await bcrypt.compare(password, user.password)
-//     if (passwordMatch) {
-//         const accessToken = jwt.sign(
-//             {'username': user.username},
-//             process.env.ACCESS_TOKEN_SECRET,
-//             {expiresIn: '30s'}
-//         );
-//     const refreshToken = jwt.sign(
-//         { 'username': user.username }, 
-//         process.env.REFRESH_TOKEN_SECRET,
-//         {expiresIn: '1d'}
-//     );
-//     const currentUser = {...user, refreshToken}
-//     }
-
-// }
-
 module.exports = { handleLogin }
