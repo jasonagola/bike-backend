@@ -64,8 +64,7 @@ const getRide = async (req, res) => {
 }
 
 const getRidesThisMonth = async (req, res) => {
-    const {id, date, start, end, value} = req.query.rideInfo
-    db.query(`UPDATE Rides SET ride_date='${date}', start_time='${start}', end_time='${end}', ride_value=${value} WHERE ride_id=${id}`, (err, result) => {
+    db.query(`SELECT * FROM Rides WHERE MONTH(ride_date)= MONTH(CURRENT_DATE())`, (err, result) => {
         if (err) {
             console.log(err)
             return res.send(err)
