@@ -6,9 +6,16 @@ const databaseRoute = require("./routes/database")
 const registerRoute = require("./routes/register")
 const authRoute = require('./routes/auth')
 const loyaltyRoute = require('./routes/loyalty')
+const refreshRoute = require('./routes/refresh')
+const logoutRoute = require('./routes/logout')
 const cron = require('node-cron')
+const verifyJWT = require('./middleware/verifyJWT')
+const cookieParser = require('cookie-parser')
 const https = require('https')
 const fs = require('fs')
+const corsOptions = require('./config/corsOptions')
+const credentials = require('./middleware/credentials')
+
 
 
 
@@ -18,13 +25,25 @@ PORT = 8800
 
 app.listen(PORT, () => console.log(`Customer Loyalty Backend now running on port: ${PORT}`))
 
-app.use(cors())
-app.use(express.json())
+app.use(credentials)
+app.use(cors(corsOptions))
 
-app.use('/backend/square', squareRoute)
-app.use('/backend/db', databaseRoute)
+//Middleware
+app.use(express.json())
+app.use(cookieParser())
+
+
+
 app.use('/register', registerRoute)
 app.use('/auth', authRoute)
+app.use('/refresh', refreshRoute )
+app.use('/logout', logoutRoute)
+
+//Verified Routes
+// app.use(verifyJWT);
+app.use('/backend/square', squareRoute);
+app.use('/backend/db', databaseRoute);
+app.use('/loyalty', loyaltyRoute);
 
 ////For use in deployed VPS for https creation
 
