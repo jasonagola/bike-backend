@@ -4,10 +4,8 @@ const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
 const handleLogin = async (req, res) => {
-    console.log('Login Handler')
-    console.log(req.body)
+    // console.log(req.body)
     const {username, password} = req.body;
-    console.log('This is the username:' + username)
     if (!username || !password) {
         return res.status(400).json({'message': 'Username and Password are required'});
     }
@@ -24,6 +22,7 @@ const handleLogin = async (req, res) => {
                 const passwordMatch = await bcrypt.compare(password, foundUser.password)
                 if (passwordMatch) {
                     const roles = foundUser.roles
+                    console.log(roles)
                     const accessToken = jwt.sign(
                         { "UserInfo": {
                             'username': foundUser.username,
@@ -47,9 +46,8 @@ const handleLogin = async (req, res) => {
                             console.log('refresh_token set')
                         };
                     });
-                    console.log(`Auth Controller Data: Refresh Token: ${refreshToken}`)
                     res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 }); // sameSite: 'None', secure: true,   Add for deployed server
-                    res.json({accessToken})
+                    res.json({accessToken, roles})
                 } else {
                     res.sendStatus(401)
                 }
