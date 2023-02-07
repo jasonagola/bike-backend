@@ -3,14 +3,18 @@ require('dotenv').config
 
 const verifyJWT = (req, res, next) => {
     console.log('verifying')
-    const authHeader = req.headers.authorization || req.headers.authorization
-    if (!authHeader?.startsWith('Bearer')) return res.sendStatus(401);
-    const token = authHeader.split(' ')[1]
+    console.log(req.cookies)
+    const token = req.cookies?.jwt
+    console.log(token)
+    if (!token) return res.sendStatus(401);
     jwt.verify(
         token, 
-        process.env.ACCESS_TOKEN_SECRET,
+        process.env.REFRESH_TOKEN_SECRET,
         (err, decoded) => {
-            if (err) return res.sendStatus(403);
+            if (err) {
+                console.log(err)
+                return res.sendStatus(403);
+            }
             req.user = decoded.UserInfo.username
             req.roles = decoded.UserInfo.roles
             next();

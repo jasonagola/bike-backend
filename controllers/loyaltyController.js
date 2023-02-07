@@ -76,6 +76,7 @@ const getRidesThisMonth = async (req, res) => {
 
 
 const addRide = async (req, res) => {
+    console.log('Hitting Add Ride in Loyalty Controller')
     const {date, start, end, value, processed} = req.query.rideInfo
     db.query(`INSERT INTO Rides (ride_date, start_time, end_time, ride_value, processed) VALUES ('${date}', '${start}', '${end}', ${value}, 0)`, (err, result) => {
         if (err) {
