@@ -49,7 +49,7 @@ const handleLogin = async (req, res) => {
                     });
                     console.log(`Auth Controller Data: Refresh Token: ${refreshToken}`)
                     res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 }); // sameSite: 'None', secure: true,   Add for deployed server
-                    res.json({accessToken})
+                    res.json({accessToken, roles})
                 } else {
                     res.sendStatus(401)
                 }
