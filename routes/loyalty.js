@@ -10,13 +10,20 @@ const loyaltyController = require('../controllers/loyaltyController')
     
 loyalty.route('/ride')
     .get(loyaltyController.getRide)
-    .post(verifyJWT,loyaltyController.addRide)
+    .post(loyaltyController.addRide)
     // .delete(loyaltyController.deleteRide)
 
 loyalty.route('/listRides')
-    .get(verifyJWT, loyaltyController.getRidesThisMonth)
+    .get(loyaltyController.getRidesThisMonth)
 
 loyalty.route('/test')
-    .get(verifyJWT, () => console.log("This worked"))
+    .get(() => console.log("This worked"))
+
+loyalty.route('/checkInStatus')
+    .get(loyaltyController.checkInStatus)
+
+loyalty.route('/customer')
+    .get(loyaltyController.checkCustomerExists)
+    .put(loyaltyController.addCustomer)
 
 module.exports = loyalty

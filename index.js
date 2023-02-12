@@ -40,8 +40,8 @@ app.use('/refresh', refreshRoute )
 app.use('/logout', logoutRoute)
 
 //Verified Routes
-// app.use(verifyJWT);
-app.use('/backend/square', squareRoute);
+app.use(verifyJWT);
+app.use('/square', squareRoute);
 app.use('/backend/db', databaseRoute);
 app.use('/loyalty', loyaltyRoute);
 

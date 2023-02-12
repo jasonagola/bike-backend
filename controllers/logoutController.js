@@ -1,4 +1,4 @@
-const db = require('../databaseConfig')
+const db = require('../config/databaseConfig')
 
 const handleLogout = async (req, res) => {
     //client side needs to delete accessToken

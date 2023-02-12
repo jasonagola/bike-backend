@@ -1,7 +1,8 @@
-const db = require('../databaseConfig')
+const db = require('../config/databaseConfig')
 
 ///Should Rewrite to return customer anyway
 const checkCustomerExists = async (req, res) => {
+    console.log(`Checking Customer Exists`)
     const customer_id = req.query.customer_id
     db.query(`SELECT EXISTS(SELECT 1 FROM Customers WHERE customer_id = '${customer_id}')`, (err, result) => {
         if (err) {
@@ -99,6 +100,8 @@ const updateRide = async (req, res) => {
         }
     })
 }
+
+
 
 module.exports = {
     checkCustomerExists,

@@ -1,5 +1,5 @@
 const router = require("express").Router()
-const db = require('../databaseConfig')
+const db = require('../config/databaseConfig')
 const { verifyJWT } = require("../middleware/verifyJWT")
 
 

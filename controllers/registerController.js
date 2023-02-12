@@ -1,4 +1,4 @@
-const db = require("../databaseConfig")
+const db = require("../config/databaseConfig")
 const bcrypt = require('bcrypt')
 
 const registerNewUser = async (req, res) => {
