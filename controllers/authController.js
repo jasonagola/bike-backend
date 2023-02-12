@@ -46,6 +46,8 @@ const handleLogin = async (req, res) => {
                             console.log('refresh_token set')
                         };
                     });
+                    console.log(`Refresh Token: ${refreshToken}`)
+                    console.log(`Access Token: ${accessToken}`)
                     res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'None', secure: true,  maxAge: 24 * 60 * 60 * 1000 }); // sameSite: 'None', secure: true,   Add for deployed server
                     res.json({accessToken, roles})
                 } else {
