@@ -11,7 +11,8 @@ const loyaltyController = require('../controllers/loyaltyController')
 loyalty.route('/ride')
     .get(loyaltyController.getRide)
     .post(loyaltyController.addRide)
-    // .delete(loyaltyController.deleteRide)
+    .put(loyaltyController.updateRide)
+    .delete(loyaltyController.deleteRide)
 
 loyalty.route('/listRides')
     .get(loyaltyController.getRidesThisMonth)
@@ -21,6 +22,9 @@ loyalty.route('/test')
 
 loyalty.route('/checkInStatus')
     .get(loyaltyController.checkInStatus)
+
+loyalty.route('/checkIn')
+    .put(loyaltyController.checkIn)
 
 loyalty.route('/customer')
     .get(loyaltyController.checkCustomerExists)

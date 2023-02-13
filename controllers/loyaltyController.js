@@ -29,8 +29,10 @@ const addCustomer = async (req, res) => {
 }
 
 const checkIn = async (req, res) => {
-    const {customer_id, checkInDate} = req.query
-    db.query(`INSERT INTO CheckIn (customer_id, checkIn) VALUES ('${customer_id}','${checkInDate}')`, (err, result) => {
+    const {customer_id, rideInfo, checkInDate} = req.query
+    const ride_value = rideInfo.ride_value
+    const ride_id = rideInfo.ride_id
+    db.query(`INSERT INTO CheckIn (customer_id, check_in, ride_id, value) VALUES ('${customer_id}','${checkInDate}', '${ride_id}', '${ride_value}')`, (err, result) => {
         if (err) {
             console.log(err)
             res.send(err)
@@ -41,8 +43,9 @@ const checkIn = async (req, res) => {
 }
 
 const checkInStatus = async (req, res) => {
-    const {customer_id} = req.query
-    db.query(`SELECT EXISTS(SELECT 1 FROM CheckIn WHERE customer_id = '${customer_id}')`, (err, result) => {
+    const {customer_id, ride_id} = req.query
+
+    db.query(`SELECT EXISTS(SELECT 1 FROM CheckIn WHERE customer_id = '${customer_id}' AND ride_id = '${ride_id}')`, (err, result) => {
         if (err) {
             console.log(err)
             return res.send(err)
@@ -101,6 +104,19 @@ const updateRide = async (req, res) => {
     })
 }
 
+const deleteRide = async (req, res) => {
+   const ride_id = req.query.rideId
+    console.log('delete ride endpoint but no delete function implemented')
+    db.query(`DELETE FROM Rides WHERE ride_id = '${ride_id}'`, (err, result) => {
+        if (err) {
+            console.log(err)
+            return res.send(err)
+        } else {
+            res.send(result)
+        }
+    })
+}
+
 
 
 module.exports = {
@@ -111,5 +127,6 @@ module.exports = {
     getRide, 
     getRidesThisMonth,
     addRide,
+    deleteRide,
     updateRide
 }
