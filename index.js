@@ -68,4 +68,10 @@ app.get('/backend', (req, res) => {
 cron.schedule('0 14 * * SUN', function() {console.log('Every Sunday at 14:00')})
 // cron.schedule('* * * * *', function() {console.log('This runs every minute')})
 
-cron.schedule('* * * * *', dailyLoyaltyCleanUp)
+
+
+//Schedule for 5AM UTC every day. Adds New CheckIns to Customer 
+cron.schedule('0 5 * * *', dailyLoyaltyCleanUp)
+
+//Need To add Monthly Cleanup and Customer Group assignments
+//
