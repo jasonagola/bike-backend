@@ -117,6 +117,17 @@ const deleteRide = async (req, res) => {
     })
 }
 
+const getCheckInsToday = async (req, res) => {
+    db.query(`SELECT * FROM CheckIn WHERE check_in = CURRENT_DATE`, (err, result) => {
+        if (err) {
+            console.log(err)
+            return res.send(err)
+        } else {
+            res.send(result)
+        }
+    })
+}
+
 
 
 module.exports = {

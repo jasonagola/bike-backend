@@ -15,6 +15,7 @@ const https = require('https')
 const fs = require('fs')
 const corsOptions = require('./config/corsOptions')
 const credentials = require('./middleware/credentials')
+const { dailyLoyaltyCleanUp } = require('./schedule')
 
 
 
@@ -65,4 +66,6 @@ app.get('/backend', (req, res) => {
 })
 
 cron.schedule('0 14 * * SUN', function() {console.log('Every Sunday at 14:00')})
-cron.schedule('* * * * *', function() {console.log('This runs every minute')})
+// cron.schedule('* * * * *', function() {console.log('This runs every minute')})
+
+cron.schedule('* * * * *', dailyLoyaltyCleanUp)
