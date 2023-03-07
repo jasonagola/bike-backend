@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
 const handleRefreshToken = (req, res) => {
-    console.log('Token Refresh Hit')
     const cookies = req.cookies;
     console.log(cookies)
     if (!cookies?.jwt) {
@@ -38,7 +37,7 @@ const handleRefreshToken = (req, res) => {
                                 }
                             }, 
                             process.env.ACCESS_TOKEN_SECRET,
-                            {expiresIn: '1d'}
+                            {expiresIn: '24hr'}
                         );
                         res.json({accessToken})
                     }

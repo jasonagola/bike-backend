@@ -2,13 +2,13 @@ const db = require("../config/databaseConfig")
 const bcrypt = require('bcrypt')
 
 const registerNewUser = async (req, res) => {
-    const {username, password} = req.body
+    const {username, password, roles} = req.body
     console.log(username, password)
     if (!username || !password) {
         return res.status(400).json({ 'message': 'Username and Password are required for login'})
     }
     const hashedPassword = await bcrypt.hash(password, 10);
-    db.query(`INSERT INTO Users (username, roles, password) VALUES ('${username}', 2001, '${hashedPassword}')`, (err, result) => {
+    db.query(`INSERT INTO Users (username, roles, password) VALUES ('${username}', ${roles}, '${hashedPassword}')`, (err, result) => {
         if (err) {
             console.log(err)
             if(err.errno == 1062) {

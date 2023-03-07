@@ -8,6 +8,7 @@ const authRoute = require('./routes/auth')
 const loyaltyRoute = require('./routes/loyalty')
 const refreshRoute = require('./routes/refresh')
 const logoutRoute = require('./routes/logout')
+const bingoRoute = require('./routes/bingo')
 const cron = require('node-cron')
 const verifyJWT = require('./middleware/verifyJWT')
 const cookieParser = require('cookie-parser')
@@ -35,13 +36,15 @@ app.use(cookieParser())
 
 
 
-app.use('/register', registerRoute)
+
 app.use('/auth', authRoute)
 app.use('/refresh', refreshRoute )
 app.use('/logout', logoutRoute)
 
 //Verified Routes
 app.use(verifyJWT);
+app.use('/bingo', bingoRoute)
+app.use('/register', registerRoute)
 app.use('/square', squareRoute);
 app.use('/backend/db', databaseRoute);
 app.use('/loyalty', loyaltyRoute);
